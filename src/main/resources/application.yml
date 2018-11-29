@@ -8,7 +8,7 @@ spring:
             client-secret: 7bf332e7-ee5f-4c2d-bb16-49b24ed09711
             client-name: My Portal
             provider: keycloak
-            scope: user
+            scope: openid
             client-authentication-method: basic
             authorization-grant-type: authorization_code
         provider:
