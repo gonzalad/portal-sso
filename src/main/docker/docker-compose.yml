@@ -1,0 +1,12 @@
+version: '3'
+services:
+  keycloak:
+    image: "jboss/keycloak"
+    environment:
+    - KEYCLOAK_USER=admin
+    - KEYCLOAK_PASSWORD=admin
+#    - KEYCLOAK_HTTP_PORT=8180
+#    - KEYCLOAK_HTTPS_PORT=8143
+    ports:
+      - 8580:8080
+      - 8543:8043

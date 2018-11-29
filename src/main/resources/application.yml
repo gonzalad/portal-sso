@@ -1,0 +1,19 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          portal-sso:
+            client-id: portal-sso
+            client-secret: 7bf332e7-ee5f-4c2d-bb16-49b24ed09711
+            client-name: My Portal
+            provider: keycloak
+            scope: user
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://keycloak-myorg.com:8180/auth/realms/master
+            authorization-uri: http://keycloak-myorg.com:8180/auth/realms/master/protocol/openid-connect/auth
+
+logging.level.root: INFO
