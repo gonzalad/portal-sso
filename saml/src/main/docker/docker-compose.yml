@@ -1,0 +1,14 @@
+version: '3'
+services:
+  keycloak:
+    image: "jboss/keycloak"
+    environment:
+    - KEYCLOAK_USER=admin
+    - KEYCLOAK_PASSWORD=admin
+    - KEYCLOAK_IMPORT=/data/realm-export.json
+    ports:
+      - 8180:8080
+      - 8143:8043
+    volumes:
+      - ${USERPROFILE}/.docker/portal-sso/oidc:/data
+#      - /c/Users/Pounet/docker/portal-sso/oidc:/data

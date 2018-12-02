@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          portal-oidc:
+            client-id: portal-oidc
+            client-secret: d5ce8d53-df5d-4934-9dbc-534642d96723
+            client-name: My Portal
+            provider: keycloak
+            scope: openid
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://${DOCKER_HOST:localhost}:8180/auth/realms/sample
+
+logging.level.root: INFO

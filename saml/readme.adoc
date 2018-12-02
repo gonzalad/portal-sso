@@ -1,0 +1,23 @@
+# OIDC project relying on Keycloak
+
+This project demonstrate how to use keycloack from a Spring Boot Application (OIDC RP).
+
+Keycloak will be used as an Identity Broker.
+This is done using https://www.keycloak.org/docs/latest/server_admin/index.html#_client_suggested_idp.
+
+In this sample, we forward to 'google' Identity Broker
+
+## Setup
+
+* copy src/main/docker folder content in your %USERPROFILE% directory
+  docker toolbox can only read volumes from this directory by default.
+* start docker-compose in src/main/docker
+* start the application with DOCKER_HOST env var pointing to your docker ip
+  you can get the docker ip by running `docker-machine env default`
+* connect to http://localhost:8080, you'll be redirected to google to login
+
+
+## Notes
+
+* keycloak console is available at http://<docker-host>:8180/auth/admin/master/console/#/realms/master
+
