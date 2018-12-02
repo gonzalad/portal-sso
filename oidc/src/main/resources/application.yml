@@ -5,7 +5,7 @@ spring:
         registration:
           portal-oidc:
             client-id: portal-oidc
-            client-secret: d5ce8d53-df5d-4934-9dbc-534642d96723
+            client-secret: d614fed2-59cd-4942-b4bb-aa1c37442984
             client-name: My Portal
             provider: keycloak
             scope: openid

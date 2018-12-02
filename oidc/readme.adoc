@@ -2,11 +2,6 @@
 
 This project demonstrate how to use keycloack from a Spring Boot Application (OIDC RP).
 
-Keycloak will be used as an Identity Broker.
-This is done using https://www.keycloak.org/docs/latest/server_admin/index.html#_client_suggested_idp.
-
-In this sample, we forward to 'google' Identity Broker
-
 ## Setup
 
 * copy src/main/docker folder content in your %USERPROFILE% directory

@@ -1,11 +1,6 @@
-# OIDC project relying on Keycloak
+# SAML project relying on Keycloak
 
-This project demonstrate how to use keycloack from a Spring Boot Application (OIDC RP).
-
-Keycloak will be used as an Identity Broker.
-This is done using https://www.keycloak.org/docs/latest/server_admin/index.html#_client_suggested_idp.
-
-In this sample, we forward to 'google' Identity Broker
+This project demonstrate how to use keycloack from a Spring Boot Application (SAML SP).
 
 ## Setup
 
@@ -16,8 +11,57 @@ In this sample, we forward to 'google' Identity Broker
   you can get the docker ip by running `docker-machine env default`
 * connect to http://localhost:8080, you'll be redirected to google to login
 
+## Run
+
+* start PortalSamlApplication
+* go to http://localhost:8080/saml/login
+
+## Gotchas
+
+Direct access to http://localhost:8080 generates an error (access to this page
+needs to be restricted only to authenticated users).
+
 
 ## Notes
 
 * keycloak console is available at http://<docker-host>:8180/auth/admin/master/console/#/realms/master
+* to export a realm.json from docker, just;:
+** attach to running keycloak docker, start a new keycloak instance on different ports than the running one and add sysprops necessary to expose on a volume +
+   See also https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import
++
+[source,sh]
+----
+docker ps | grep keycloak
+# returns the container id
+docker exec -ti <container-id> /bin/bash
+cd /opt/jboss/keycloak
+bin/standalone.sh -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.action=export -Dkeycloak.migration.realmName=sample -Dkeycloak.migration.usersExportStrategy=REALM_FILE -Dkeycloak.migration.file=/data/keycloak-export.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING -Djboss.http.port=8888 -Djboss.https.port=9999 -Djboss.management.http.port=7777
+----
+** if you need to use this file fin docker-compose for importing a realm, you'll need to keep only the sample realm in the json (there must be a single realm and not a realm array in
+   the imported json)
+* Configuring SAML SP manually in keycloak +
+  To get the necessary info from keycloak admin:
+** Go to keycloak console (i.e: http://192.168.99.100:8180/auth)
+** Select sample realm
+** Menu Clients, create new client with
++
+|===
+| Name | portal-saml
+|===
+** Edit portal-saml client and select
++
+|===
+| Client Protocol | saml
+| Include Authn Statement | ON
+| Sign assertions | ON
+| Signature algorithm |RSA_SHA256
+| SAML Signature Key Name|KEY_ID
+| Name ID Format|username
+| Valid redirect URIs | http://localhost:8080/saml/SSO
+|===
+** Export the IDP SAML Metadata +
+*** Select Installation tab
+*** Select Format Option = SAML Metadata IDPSSODescriptor, click download
+*** Copy this file in src/main/resources
+*** reference this file from Spring application.yml (saml.sso.idp.metadata-location)
 
