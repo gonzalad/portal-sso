@@ -26,8 +26,8 @@ public class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .authorizationEndpoint().authorizationRequestResolver(authorizationRequestResolver());
+                .oauth2Login();
+                //.authorizationEndpoint().authorizationRequestResolver(authorizationRequestResolver());
     }
 
     /**

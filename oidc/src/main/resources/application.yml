@@ -3,9 +3,9 @@ spring:
     oauth2:
       client:
         registration:
-          portal-sso:
-            client-id: portal-sso
-            client-secret: 7bf332e7-ee5f-4c2d-bb16-49b24ed09711
+          portal-oidc:
+            client-id: portal-oidc
+            client-secret: d5ce8d53-df5d-4934-9dbc-534642d96723
             client-name: My Portal
             provider: keycloak
             scope: openid
@@ -13,7 +13,6 @@ spring:
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: http://keycloak-myorg.com:8180/auth/realms/master
-            authorization-uri: http://keycloak-myorg.com:8180/auth/realms/master/protocol/openid-connect/auth
+            issuer-uri: http://${DOCKER_HOST:localhost}:8180/auth/realms/sample
 
 logging.level.root: INFO
